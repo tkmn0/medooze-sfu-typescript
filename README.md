@@ -16,19 +16,18 @@
 (for webrtc sfu)
 - [ws](https://github.com/websockets/ws) (for signaling)
 
-### Setup
-server
-```bash 
-npm install
-```
+### Getting Started
 
-### Run
-server
-```bash
+```bash 
+# install
+npm install
+
+# run 
 npm run debug
 ```
 websocket server will start port at 3000.
 
+Check [config file](./src/config/config.ts). You can change some settings.
 ### Docker
 WIP
 
