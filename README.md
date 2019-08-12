@@ -28,8 +28,9 @@ npm run debug
 websocket server will start port at 3000.
 
 Check [config file](./src/config/config.ts). You can change some settings.
+
 ### Docker
 WIP
 
 # Licence
-This software is released under the MIT License, see LICENSE.
+MIT
