@@ -24,3 +24,6 @@ RUN apt purge -y nodejs npm
 
 # copy project with excluding some files, see .dockerignore
 COPY . /root/app/
+
+WORKDIR /root/app/
+RUN npm install
