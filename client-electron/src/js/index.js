@@ -83,6 +83,7 @@ const setupVideoStream = async (file) => {
     videoElement.height = video_height;
     document.body.appendChild(videoElement);
 
+    console.log("file stream:", file);
     if (file) {
         videoElement.src = "./media/BigBuckBunny.mp4";
         videoElement.play();
@@ -92,7 +93,7 @@ const setupVideoStream = async (file) => {
 
         return stream = videoElement.captureStream();
     } else {
-        let stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640 }, audio: true });
+        let stream = await navigator.mediaDevices.getUserMedia({ video: { width: { exact: 3840 } }, audio: true });
         videoElement.srcObject = stream;
         await videoElement.play();
         return stream;
@@ -106,6 +107,7 @@ const addVideoForStream = async (stream, muted) => {
     video.width = video_width;
     video.height = video_height;
 
+    video.controls = true;
     document.body.appendChild(video);
     await video.play();
 };
