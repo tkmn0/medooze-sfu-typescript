@@ -19,7 +19,8 @@ const init = async () => {
 
 const setupConnection = async () => {
     try {
-        _ws = await setupWs('ws://localhost/sfu/');
+        // _ws = await setupWs('ws://52.194.251.26:3000');
+        _ws = await setupWs('ws://52.194.251.26/sfu/');
 
         _peer = prepareNewConnection(true, _stream);
         makeOfferAsync(_peer);

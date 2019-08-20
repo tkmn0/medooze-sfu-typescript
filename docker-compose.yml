@@ -1,35 +1,23 @@
 version: '3'
-services:  
-  node-app:
-    image: node:10
-    user: node
-    container_name: node-app
-    working_dir: /home/node/app
-    volumes:
-      - ./node-app:/home/node/app
-    environment:
-      - NODE_ENV=development
-      - PORT=3030
-    command: node app.js
-    ports:
-      - "3030:3030" #Debug用
-  
+services:
   medooze-app:
     build: ./medooze_sfu/
     container_name: medooze-app
     ports:
       - "3000:3000"
+    network_mode: "host"
+    environment:
+      - NODE_ENV=production
     working_dir: /root/app/src
     command: npm run debug
-  
+    # tty: true
+
   nginx:
     image: nginx
     container_name: nginx
-    links: 
-      - node-app
-      - medooze-app
     ports:
       - "80:80"
+    network_mode: "host"
     volumes:
       - ./nginx/html:/usr/share/nginx/html:ro
       - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
