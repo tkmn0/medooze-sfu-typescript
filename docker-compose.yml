@@ -7,7 +7,7 @@ services:
       - "3000:3000"
     network_mode: "host"
     environment:
-      - NODE_ENV=production
+      - ./meooze.env
     working_dir: /root/app/src
     command: npm run debug
     # tty: true

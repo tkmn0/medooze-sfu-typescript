@@ -17,8 +17,8 @@ const config: Config = {
     },
     sfu: {
         video_codec: process.env.VIDEO_CODEC || 'h264',
-        check_media_stream_alive: true,
-        enable_log: true
+        check_media_stream_alive: (process.env.CHECK_MEDIA_STREAM_ALIVE == 'on'),
+        enable_log: (process.env.ENABLE_SFU_LOG == 'on')
     }
 }
 
