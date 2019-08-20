@@ -3,4 +3,3 @@
 **/dist
 **/.envrc
 ./client-electron
-./Dockerfile

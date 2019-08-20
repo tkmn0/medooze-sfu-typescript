@@ -19,7 +19,7 @@ const init = async () => {
 
 const setupConnection = async () => {
     try {
-        _ws = await setupWs('ws://localhost:3000');
+        _ws = await setupWs('ws://localhost/sfu/');
 
         _peer = prepareNewConnection(true, _stream);
         makeOfferAsync(_peer);
@@ -44,6 +44,7 @@ const ClientModel = () => {
 
 const setupWs = (url) => {
 
+    console.log("ws url:", url);
     return new Promise((resolve, reject) => {
         let ws = new WebSocket(url);
 
