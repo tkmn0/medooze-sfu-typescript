@@ -6,8 +6,7 @@ services:
     ports:
       - "3000:3000"
     network_mode: "host"
-    environment:
-      - ./meooze.env
+    env_file: .medooze.env
     working_dir: /root/app/src
     command: npm run debug
     # tty: true
