@@ -1,0 +1,22 @@
+version: '3'
+services:
+  medooze-app:
+    build: ./medooze_sfu/
+    container_name: medooze-app
+    ports:
+      - "3000:3000"
+    network_mode: "host"
+    env_file: .medooze.env
+    working_dir: /root/app/src
+    command: npm run debug
+    # tty: true
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    network_mode: "host"
+    volumes:
+      - ./nginx/html:/usr/share/nginx/html:ro
+      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro

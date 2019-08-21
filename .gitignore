@@ -9,6 +9,7 @@ lib-cov
 *.pid
 *.gz
 *.swp
+*.env
 
 pids
 logs

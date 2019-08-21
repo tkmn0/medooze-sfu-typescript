@@ -4,6 +4,7 @@ import { SignalingMessage } from "../data/signalingMessage";
 import { ISignalingServer } from "./signalingServerInterface";
 import { SignalingDelegate } from "./signalingDelegate";
 import { CONFIG } from "../config/config";
+import * as Http from "http"
 
 export class WebSocketServer implements ISignalingServer {
     private server: WebSocket.Server;
@@ -11,9 +12,12 @@ export class WebSocketServer implements ISignalingServer {
     signalingDelegate: SignalingDelegate;
 
     constructor() {
-        this.server = new WebSocket.Server({ port: CONFIG.signaling.port });
+        const httpServer = Http.createServer();
+        // this.server = new WebSocket.Server({ port: CONFIG.signaling.port });
+        this.server = new WebSocket.Server({ server: httpServer });
         this.connections = new Map<string, WebSocket>();
         this.setupServer();
+        httpServer.listen(CONFIG.signaling.port);
     }
 
     private setupServer() {
@@ -38,7 +42,7 @@ export class WebSocketServer implements ISignalingServer {
         });
 
         this.server.on('listening', () => {
-            console.log("server listenin on " + this.server.options.port);
+            console.log("server listenin on " + CONFIG.signaling.port);
         });
     }
 

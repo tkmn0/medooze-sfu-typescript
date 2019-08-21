@@ -23,7 +23,7 @@ RUN n v11.4.0
 RUN apt purge -y nodejs npm
 
 # copy project with excluding some files, see .dockerignore
-COPY . /root/app/
+ADD . /root/app/
 
 WORKDIR /root/app/
 RUN npm install
