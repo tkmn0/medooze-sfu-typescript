@@ -7,11 +7,12 @@ class Main {
     private localStream: MediaStream;
 
     constructor() {
-
         this.localStream = this.setupStream();
         this.sfuClient = new SfuClient(process.env.SIGNALING_URL);
         this.sfuClient.onStream = this.onStream;
         this.setupView();
+
+        // window.open("chrome://webrtc-internals", '', 'width=300,height=300')
     }
 
     private setupView = () => {
