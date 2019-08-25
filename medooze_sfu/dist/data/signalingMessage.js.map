@@ -1,1 +1,0 @@
-{"version":3,"file":"signalingMessage.js","sourceRoot":"","sources":["../../src/data/signalingMessage.ts"],"names":[],"mappings":";;AAAA,MAAa,gBAAgB;IAOzB,YAAY,GAAsE;QAC9E,IAAI,CAAC,IAAI,GAAG,GAAG,CAAC,IAAI,CAAC;QACrB,IAAI,CAAC,GAAG,GAAG,GAAG,CAAC,GAAG,CAAC;QACnB,IAAI,CAAC,QAAQ,GAAG,GAAG,CAAC,QAAQ,CAAC;QAC7B,IAAI,CAAC,QAAQ,GAAG,GAAG,CAAC,QAAQ,CAAC;IACjC,CAAC;CACJ;AAbD,4CAaC"}
