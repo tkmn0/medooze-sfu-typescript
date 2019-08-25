@@ -1,6 +1,9 @@
 # media
 *.mp4
 
+# env 
+*.envrc
+
 # Logs
 logs
 *.log
