@@ -16,30 +16,19 @@ export class SfuClient {
 
     setupPeerConnection = () => {
 
-        const pc_config: RTCConfiguration = {
-            "iceServers": [{ "urls": "stun:stun.webrtc.ecl.ntt.com:3478" }],
+        const pc_config = {
+            iceServers: [{ "urls": "stun:stun.webrtc.ecl.ntt.com:3478" }],
             bundlePolicy: "max-bundle",
             rtcpMuxPolicy: "require",
+            sdpSemantics: "plan-b"
         };
 
-        const peer = new RTCPeerConnection(pc_config);
+        const peer = new RTCPeerConnection(pc_config as RTCConfiguration);
 
-        peer.ontrack = evt => {
-            const track = evt.track;
-            const stream = evt.streams[0];
-
-            if (track.kind == 'video') {
-
-            } else if (track.kind == 'audio') {
-
+        (peer as any).onaddstream = evt => {
+            if (this.onStream) {
+                this.onStream(evt.stream)
             }
-            if (this.onStream != null) {
-                this.onStream(stream);
-            }
-            stream.onremovetrack = e => {
-                const track = e.track;
-
-            };
         };
 
         peer.oniceconnectionstatechange = () => {
@@ -63,9 +52,7 @@ export class SfuClient {
     public connect = async (stream: MediaStream, roomName: string, userName: string) => {
         if (this._peer == null) { return; }
 
-        stream.getTracks().forEach(track => {
-            this._peer.addTrack(track);
-        });
+        (this._peer as any).addStream(stream);
 
         try {
             let offer = await this.makeOfferAsync();
