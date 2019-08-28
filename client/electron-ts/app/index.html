@@ -6,8 +6,7 @@
 </head>
 
 <body style="background: gray; color: #888888">
-    <div class='conrols' style="background: white; height: 100px; width: 100%;">
-
+    <div class='controls' style="background: white; height: 100px; width: 100%;">
         <button id="webrtcConnectButton" onclick="connectButtonClicked()">
             connect
         </button>
@@ -17,10 +16,15 @@
         <button id="removeVideoButton">
             play
         </button>
+    </div>
+    <div id="videoContainer">
+    </div>
+    <!-- <div id="webviewContainer" style="width: 100%; height: 100%">
+        <webview style="background: white" src="chrome://webrtc-internals"
+            style="display:inline-flex;widows: 100%; height:100%">
+        </webview>
+    </div> -->
 
-    </div>
-    <div style="background: gray; height: 10px; width: 100%">
-    </div>
     <script src="../dist/main.js"></script>
 </body>
 

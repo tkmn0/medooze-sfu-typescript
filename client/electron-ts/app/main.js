@@ -1,8 +1,8 @@
 require('dotenv').config();
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+const { BrowserView, BrowserWindow, app } = require('electron');
+// const app = electron.app;
+// const BrowserWindow = electron.BrowserWindow;
 const config = require('./config.js');
 
 
@@ -13,7 +13,8 @@ app.on('ready', () => {
     width: 680,
     height: 700,
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      webviewTag: true
     }
   });
   // Electronに表示するhtmlを絶対パスで指定（相対パスだと動かない）
@@ -25,4 +26,19 @@ app.on('ready', () => {
   mainWindow.on('closed', function () {
     mainWindow = null;
   });
+  let statsView = new BrowserView({
+    webPreferences: {
+      nodeIntegration: false
+    }
+  });
+  mainWindow.setBrowserView(statsView);
+  statsView.setBounds({ x: 0, y: 400, width: mainWindow.getBounds().width, height: 700 });
+  statsView.setAutoResize({
+    width: true,
+    height: true,
+    vertical: true,
+    horizontal: true
+  });
+  statsView.setBackgroundColor('white');
+  statsView.webContents.loadURL('chrome://webrtc-internals');
 });
