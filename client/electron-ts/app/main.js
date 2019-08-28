@@ -1,9 +1,6 @@
 require('dotenv').config();
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = true;
 const { BrowserView, BrowserWindow, app } = require('electron');
-// const app = electron.app;
-// const BrowserWindow = electron.BrowserWindow;
-const config = require('./config.js');
 
 
 let mainWindow = null;
@@ -18,7 +15,7 @@ app.on('ready', () => {
     }
   });
   // Electronに表示するhtmlを絶対パスで指定（相対パスだと動かない）
-  mainWindow.loadURL('file://' + __dirname + '/index.html?mediaType=' + config.webrtc.video_type);
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
 
   // ChromiumのDevツールを開く
   mainWindow.webContents.openDevTools();

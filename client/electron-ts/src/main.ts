@@ -1,4 +1,5 @@
 import { SfuClient } from "./webrtc/sfu_client";
+import { CONFIG } from "./config/config";
 
 class Main {
     private video_width = 320;
@@ -8,9 +9,10 @@ class Main {
     private videoContainer: HTMLElement;
 
     constructor() {
+        console.log(CONFIG);
         this.setupView();
         this.localStream = this.setupStream();
-        this.sfuClient = new SfuClient(process.env.SIGNALING_URL);
+        this.sfuClient = new SfuClient(CONFIG.signaling.url);
         this.sfuClient.onStream = this.onStream;
     }
 
