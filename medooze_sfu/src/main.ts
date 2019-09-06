@@ -5,7 +5,6 @@ import { Sfu } from "./sfu/sfu";
 import { CONFIG } from "./config/config";
 
 class Main {
-
     constructor() {
         console.log(CONFIG);
         let signalingServer: ISignalingServer = new WebSocketServer();

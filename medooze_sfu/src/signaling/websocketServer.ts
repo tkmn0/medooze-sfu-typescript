@@ -29,7 +29,6 @@ export class WebSocketServer implements ISignalingServer {
                     case 'offer':
                         console.log('offer from ' + message.userName);
                         this.connections.set(message.userName, socket);
-
                         if (this.signalingDelegate && this.signalingDelegate.onOffer) {
                             this.signalingDelegate.onOffer(message);
                         }

@@ -9,7 +9,10 @@ npm install
 
 ## Run
 ```bash
-npx electron ./src
+curl -o ./src/media/BigBuckBunny.mp4  -L http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 
+
+# npx electron ./src
+npm run start
 ```
 electron app will start.
 After electron window appeared, click connect button.

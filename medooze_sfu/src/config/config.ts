@@ -6,7 +6,8 @@ interface Config {
     sfu: {
         video_codec: string,
         check_media_stream_alive: boolean,
-        enable_log: boolean
+        enable_log: boolean,
+        enable_record: boolean
     }
 }
 
@@ -18,7 +19,8 @@ const config: Config = {
     sfu: {
         video_codec: process.env.VIDEO_CODEC || 'h264',
         check_media_stream_alive: (process.env.CHECK_MEDIA_STREAM_ALIVE == 'on'),
-        enable_log: (process.env.ENABLE_SFU_LOG == 'on')
+        enable_log: (process.env.ENABLE_SFU_LOG == 'on'),
+        enable_record: (process.env.ENABLE_RECORD == 'on')
     }
 }
 

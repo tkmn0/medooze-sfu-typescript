@@ -67,6 +67,10 @@ const setupWs = (url) => {
             resolve(ws);
         };
 
+        ws.onclose = (e) => {
+            reject(e);
+        };
+
         ws.onerror = (e) => {
             reject(e);
         }
@@ -152,7 +156,13 @@ const prepareNewConnection = (isOffer, stream) => {
                     // hangup
                 }
                 break;
-            case 'dissconnected':
+            case 'disconnected':
+                _peer.close();
+                _ws.close();
+                for(const v of document.getElementsByTagName("video")) {
+                    // remove video tags of remote tracks
+                    if(v.id) v.parentElement.removeChild(v);
+                }
                 break;
         }
     };

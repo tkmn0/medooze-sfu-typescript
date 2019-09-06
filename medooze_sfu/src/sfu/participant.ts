@@ -1,8 +1,11 @@
+const fs = require('fs');
 import { Room } from "./room";
-import { IncomingStream, OutgoingStream, Transport } from "medooze-media-server";
+import { MediaServer, Recorder, IncomingStream, OutgoingStream, Transport } from "medooze-media-server";
 import { TypedEvent } from "../common/typedEvent";
 import { SDPInfo, StreamInfo } from "semantic-sdp";
 import { CONFIG } from "../config/config";
+
+const Medooze: MediaServer = require("medooze-media-server");
 
 export class Participant {
 
@@ -14,6 +17,7 @@ export class Participant {
     private incomingStreams: Map<string, IncomingStream>;
     private outgoingStreams: Map<string, OutgoingStream>;
     private isStopped = false;
+    private recorder: Recorder;
 
     streamEmitter = new TypedEvent<IncomingStream>();
     reNegotiationEmitter = new TypedEvent<SDPInfo>();
@@ -89,6 +93,17 @@ export class Participant {
 
         const incomingStream = this.transport.createIncomingStream(stream);
 
+        if(CONFIG.sfu.enable_record) {
+            const recordFolder = `/tmp/${this.room.getId()}`;
+            fs.mkdir(recordFolder, { recursive: true }, () => {
+                const currentUnixtime = (new Date()).getTime();
+                const recordFilePath = `${recordFolder}/${this.name}-${currentUnixtime}.mp4`;
+
+                this.recorder = Medooze.createRecorder(recordFilePath);
+                this.recorder.record(incomingStream);
+            });
+        }
+
         this.incomingStreams.set(incomingStream.getId(), incomingStream);
         this.streamEmitter.emit(incomingStream);
 
@@ -136,14 +151,20 @@ export class Participant {
             this.transport.stop();
         }
 
+        if(this.recorder) {
+            this.recorder.stop();
+        }
+
         //Clean them
         this.room = null;
         this.incomingStreams = null;
         this.outgoingStreams = null;
         this.transport = null;
+        this.recorder = null;
         this.localSDP = null;
         this.remoteSDP = null;
         this.isStopped = true;
+
         //Done
         this.stoppedEmitter.emit(null);
     }
