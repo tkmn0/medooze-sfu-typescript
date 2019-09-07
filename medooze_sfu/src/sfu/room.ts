@@ -2,8 +2,9 @@ import { Participant } from "./participant";
 import { MediaServer, Endpoint, IncomingStream } from "medooze-media-server";
 import { EventEmitter } from "events";
 import { SupportedMedia } from "semantic-sdp";
-const Medooze: MediaServer = require("medooze-media-server");
 import { CONFIG } from "../config/config";
+
+const Medooze: MediaServer = require("medooze-media-server");
 
 export class Room {
 
