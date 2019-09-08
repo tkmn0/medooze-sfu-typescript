@@ -1,20 +1,23 @@
 import { SfuClient } from "./webrtc/sfu_client";
+import { CONFIG } from "./config/config";
 
 class Main {
     private video_width = 320;
     private video_height = 180;
     private sfuClient: SfuClient;
     private localStream: MediaStream;
+    private videoContainer: HTMLElement;
 
     constructor() {
-
-        this.localStream = this.setupStream();
-        this.sfuClient = new SfuClient(process.env.SIGNALING_URL);
-        this.sfuClient.onStream = this.onStream;
+        console.log(CONFIG);
         this.setupView();
+        this.localStream = this.setupStream();
+        this.sfuClient = new SfuClient(CONFIG.signaling.url);
+        this.sfuClient.onStream = this.onStream;
     }
 
     private setupView = () => {
+        this.videoContainer = document.getElementById('videoContainer');
         document.getElementById('webrtcConnectButton').onclick = this.connectButtonClicked;
     };
 
@@ -30,7 +33,7 @@ class Main {
         videoElement.width = this.video_width;
         videoElement.height = this.video_height;
         videoElement.id = 'localVideo';
-        document.body.appendChild(videoElement);
+        this.videoContainer.appendChild(videoElement);
 
         if (type == 'file') {
             videoElement.src = "../media/BigBuckBunny.mp4";
@@ -55,7 +58,7 @@ class Main {
         video.width = this.video_width;
         video.height = this.video_height;
 
-        document.body.appendChild(video);
+        this.videoContainer.appendChild(video);
         video.play();
     };
 }
