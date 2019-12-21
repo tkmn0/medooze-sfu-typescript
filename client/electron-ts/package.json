@@ -13,15 +13,16 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "electron": "^6.0.4",
-    "electron-rebuild": "^1.8.4",
-    "ts-loader": "^5.3.3",
-    "typescript": "^3.3.3",
-    "webpack": "^4.29.3",
-    "webpack-cli": "^3.2.3"
+    "electron": "^7.1.7",
+    "electron-rebuild": "^1.8.8",
+    "npm-check-updates": "^4.0.1",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.4",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
-    "@types/node": "^12.7.2",
-    "dotenv": "^8.1.0"
+    "@types/node": "^12.12.21",
+    "dotenv": "^8.2.0"
   }
 }
