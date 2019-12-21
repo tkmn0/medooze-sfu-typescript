@@ -28,7 +28,7 @@ class Main {
 
     private setupStream = (): MediaStream => {
         let urlParams = new URLSearchParams(location.search);
-        let type = urlParams.get('mediaType');
+        let type = CONFIG.webrtc.video_type;
         const videoElement = document.createElement('video');
         videoElement.width = this.video_width;
         videoElement.height = this.video_height;
