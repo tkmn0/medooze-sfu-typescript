@@ -17,9 +17,10 @@ export class Sfu implements SignalingDelegate {
 
     constructor(server: ISignalingServer) {
 
-        Medooze.enableDebug(CONFIG.sfu.enable_log);
-        Medooze.enableLog(CONFIG.sfu.enable_log);
-        Medooze.enableUltraDebug(CONFIG.sfu.enable_log);
+        CONFIG.sfu.enable_log = false;
+        Medooze.enableDebug(true);
+        Medooze.enableLog(false);
+        Medooze.enableUltraDebug(false);
 
         this.signalingServer = server;
         this.signalingServer.signalingDelegate = this;
@@ -68,6 +69,11 @@ export class Sfu implements SignalingDelegate {
 
         try {
             participant.init(sdp);
+            room.CreateRtpInput({
+                local: {
+                    port: 5001
+                }
+            });
         } catch (e) {
             console.log("participant initialize error: " + e);
             return;

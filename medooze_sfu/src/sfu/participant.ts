@@ -1,11 +1,13 @@
 const fs = require('fs');
 import { Room } from "./room";
-import { MediaServer, Recorder, IncomingStream, OutgoingStream, Transport } from "medooze-media-server";
+import  MediaServer,{ Recorder, IncomingStream, OutgoingStream, Transport, IncomingStreamTrack, OutgoingStreamTrack} from "medooze-media-server";
 import { TypedEvent } from "../common/typedEvent";
-import { SDPInfo, StreamInfo } from "semantic-sdp";
+import { SDPInfo, StreamInfo, ICEInfo, Setup} from "semantic-sdp";
 import { CONFIG } from "../config/config";
-
-const Medooze: MediaServer = require("medooze-media-server");
+const SemanticSDP = require("semantic-sdp");
+const DTLSInfoNode = SemanticSDP.DTLSInfo;
+const SetupNode = SemanticSDP.Setup;
+// const Medooze: MediaServer = require("medooze-media-server");
 
 export class Participant {
 
@@ -84,8 +86,25 @@ export class Participant {
 
             outgoingStream.stop();
         });
-
     }
+
+    addStreamInfo = (incomingStreamTrack: IncomingStreamTrack) => {
+        if (!this.transport)
+            throw Error("Not inited");        
+
+        const outgoingStream = this.transport.createOutgoingStream({
+            video: true,
+            audio: false,
+        });
+
+        outgoingStream.getTracks("video")[0].attachTo(incomingStreamTrack);
+
+        const info = outgoingStream.getStreamInfo();
+        this.localSDP.addStream(info);
+        this.outgoingStreams.set(outgoingStream.getId(), outgoingStream);
+        this.reNegotiationEmitter.emit(this.localSDP);
+        console.log("--- add stream info, reNegotiation needed ---");
+    };
 
     publishStream = (stream: StreamInfo) => {
         if (!this.transport)

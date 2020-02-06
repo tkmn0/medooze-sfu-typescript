@@ -47,6 +47,7 @@ class Main {
     };
 
     private onStream = (stream: MediaStream) => {
+        console.log("on stream: ", stream.id);
         if (stream.id != this.localStream.id)
             this.addVideoForStream(stream);
     };
