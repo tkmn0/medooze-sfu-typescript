@@ -22,20 +22,20 @@
     "@types/ip": "^1.1.0",
     "@types/ws": "^6.0.4",
     "ip": "^1.1.5",
-    "medooze-media-server": "^0.82.0",
-    "typescript": "^3.7.4",
-    "ws": "^7.2.1"
+    "medooze-media-server": "^0.82.1",
+    "typescript": "^3.8.3",
+    "ws": "^7.2.5"
   },
   "devDependencies": {
-    "@types/node": "^12.12.21",
-    "nodemon": "^2.0.2",
-    "npm-check-updates": "^4.0.1",
+    "@types/node": "^12.12.37",
+    "nodemon": "^2.0.3",
+    "npm-check-updates": "^4.1.2",
     "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.0",
-    "ts-loader": "^6.2.1",
-    "ts-node": "^8.5.4",
-    "webpack": "^4.41.4",
-    "webpack-cli": "^3.3.10",
+    "rimraf": "^3.0.2",
+    "ts-loader": "^6.2.2",
+    "ts-node": "^8.9.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
     "webpack-node-externals": "^1.7.2"
   }
 }
